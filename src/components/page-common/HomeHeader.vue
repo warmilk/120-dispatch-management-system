@@ -1,26 +1,31 @@
 <template>
-	<header>
-		<div>
-			<img src="@/assets/img/logo-inside.png" alt="logo" />
-			<ul class="header-ul">
-				<li v-for="(item, index) in menuList" :key="item.index" class="item-list" v-on:click="pickSubMenu(index)" v-bind:class="{'header-active': showActive(item)}">
-					<!-- <router-link v-if="index === item.active" :to="item.path"  class="header-active">{{item.name}}</router-link>
-	        <router-link :to="item.path" v-else>{{item.name}}</router-link> -->
-					{{item.name}}
-				</li>
-			</ul>
-			<div class="user">
-				<img src="@/assets/img/user.png" alt="user" />
-				<a href="#" @click="logout">退出</a>
+	<header class="header">
+		<!-- 顶部大导航条 -->
+		<header class="main-nav">
+			<!-- logo -->
+			<img class="logo" src="@/assets/img/logo-inside.png" alt="logo" />
+			<!-- 大导航条 -->
+			<nav class="nav">
+				<ul>
+					<li class="nav__item" v-for="(item, index) in menuList" :key="item.index" v-on:click="pickSubMenu(index)" v-bind:class="{'header-active': showActive(item)}">
+						{{item.name}}
+					</li>
+				</ul>
+			</nav>
+			<!-- 头像 -->
+			<div class="profile">
+				<img class="profile__avatar" src="@/assets/img/user.png" alt="user" />
+				<a class="profile__loginout" href="#" @click="logout">退出</a>
 			</div>
-		</div>
-		<section class="menu">
+		</header>
+		<!-- 底部小导航条 -->
+		<nav class="sub-nav">
 			<ul>
-				<li v-for="item in subMenu" :key="item.index">
+				<li class="sub-nav__item" v-for="item in subMenu" :key="item.index">
 					<router-link :to="item.path">{{item.name}}</router-link>
 				</li>
 			</ul>
-		</section>
+		</nav>
 	</header>
 </template>
 
@@ -29,7 +34,108 @@
 	export default {
 		data() {
 			return {
-				subMenu: []
+				subMenu: [],
+				menuList: [
+					{
+						id: 1,
+						name: "呼叫管理",
+						path: "call-manage",
+						active: 1,
+						children: [{
+								name: "呼叫首页",
+								path: "/call-manage"
+							},
+							{
+								name: "通话记录",
+								path: "/call-record"
+							},
+							{
+								name: "黑名单",
+								path: "/black-list"
+							}
+						]
+					},
+					{
+						id: 2,
+						name: "调度管理",
+						path: "call-manage",
+						active: 2,
+						children: [{
+								name: "呼叫首页"
+							},
+							{
+								name: "通话记录"
+							},
+							{
+								name: "调度管理"
+							}
+						]
+					},
+					{
+						id: 3,
+						name: "人员管理",
+						path: "call-manage",
+						active: 3,
+						children: [{
+								name: "呼叫首页"
+							},
+							{
+								name: "通话记录"
+							},
+							{
+								name: "调度管理"
+							}
+						]
+					},
+					{
+						id: 4,
+						name: "应急资源管理",
+						path: "call-manage",
+						active: 4,
+						children: [{
+								name: "呼叫首页"
+							},
+							{
+								name: "通话记录"
+							},
+							{
+								name: "调度管理"
+							}
+						]
+					},
+					{
+						id: 5,
+						name: "急救监控",
+						path: "call-manage",
+						active: 5,
+						children: [{
+								name: "呼叫首页"
+							},
+							{
+								name: "通话记录"
+							},
+							{
+								name: "调度管理"
+							}
+						]
+					},
+					{
+						id: 6,
+						name: "管理员管理模块",
+						path: "call-manage",
+						active: 6,
+						children: [{
+								name: "人员管理"
+							},
+							{
+								name: "紧急通讯录"
+							},
+							{
+								name: "找回密码"
+							}
+						]
+					},
+				]
 			};
 		},
 		computed: {},
@@ -48,86 +154,64 @@
 				return actived;
 			},
 			logout() {
-				LoginApi.logout()
-					.then(resp => {
-						this.$message.info("登出成功");
-						setTimeout(() => {
-							this.$router.replace({
-								path: "/"
-							});
-						}, 1000);
-					})
-					.catch(msg => {
-						this.$message.error(`退出失败${msg}`);
-					});
+				LoginApi.logout().then(resp => {
+					this.$message.info("登出成功");
+					setTimeout(() => {
+						this.$router.replace({
+							path: "/"
+						});
+					}, 1000);
+				}).catch(msg => {
+					this.$message.error(`退出失败${msg}`);
+				});
 			}
 		},
-		props: ["menuList"]
 	};
 </script>
 
 <style lang="scss" scoped>
-	header {
-		img {
-			display: inline-block;
-			margin-top: 1%;
-			margin-left: 5%;
-		}
-		ul.header-ul {
-			display: inline-block;
-			width: 60%; // margin-top: 1.0rem;
-			color: #333333;
-			li {
-				font-size: 0.88rem;
-				display: inline;
-				margin-left: 5%;
-				color: #333333;
-				line-height: 4rem;
-				padding-bottom: 0.5rem;
-				&.header-active {
-					border-bottom: 2px solid #3b56b6;
-				} // line-height: 3rem;
-				&:first-child {
-					margin-left: 13%;
-				}
-				&:hover {
+	.header {
+		width: 100%;
+		.main-nav {
+			$headerHeight: 72px;
+			height: $headerHeight;
+			overflow: hidden;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.logo {
+				height: 40px;
+				margin-left: 6%;
+			}
+			.nav {
+				&__item {
+					float: left;
+					margin: 0 10px;
 					cursor: pointer;
 				}
 			}
-		}
-	}
-	.menu {
-		margin: 0;
-		height: 36px;
-		background: #3b56b6;
-		ul {
-			font-size: 1rem;
-			margin-left: 160px;
-			li {
-				margin-left: 64px;
-				display: inline-block;
-				a {
-					display: inline-block;
-					color: #ffffff;
-					line-height: 2.2rem;
+			.profile {
+				margin-right: 6%;
+				display: flex;
+				align-items: center;
+				&__avatar {
+					width: 32px;
+					height: 32px;
+					border-radius: 100px;
 				}
 			}
 		}
-	}
-	.router-link-exact-active {
-		border-bottom: 2px solid #ffffff;
-	}
-	.user {
-		float: right;
-		width: 10rem;
-		text-align: center;
-		border-left: 2px solid #e9e9e9;
-		margin-top: 1rem;
-		a {
-			line-height: 2.5rem;
-			margin-left: 0.5rem;
-			color: #333333;
-			font-size: 0.75rem;
+		.sub-nav {
+			width: 100%;
+			height: 36px;
+			background: #3B56B6;
+			ul {
+				color: #fff;
+			}
+			&__item {
+				float: left;
+				color: #fff;
+			}
 		}
 	}
 </style>

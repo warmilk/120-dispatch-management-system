@@ -12,6 +12,9 @@ import ElementUI from "element-ui";
 import 'assets/scss/element-variables.scss'
 Vue.use(ElementUI);
 
+// 全局样式
+import 'scss/style.scss'
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
