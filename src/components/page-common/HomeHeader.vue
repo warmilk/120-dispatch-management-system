@@ -15,7 +15,7 @@
 			<!-- 头像 -->
 			<div class="profile">
 				<img class="profile__avatar" src="@/assets/img/user.png" alt="user" />
-				<a class="profile__loginout" href="#" @click="logout">退出</a>
+				<a class="profile__logout" href="#" @click="logout">退出</a>
 			</div>
 		</header>
 		<!-- 底部小导航条 -->
@@ -187,17 +187,25 @@
 				&__item {
 					float: left;
 					margin: 0 10px;
+					padding: 10px 0;
+					border-bottom: 3px solid #fff;
 					cursor: pointer;
+					&:hover{
+						border-bottom: 3px solid #3B56B6;
+					}
 				}
 			}
 			.profile {
-				margin-right: 6%;
+				margin-right: 8%;
 				display: flex;
 				align-items: center;
 				&__avatar {
 					width: 32px;
 					height: 32px;
 					border-radius: 100px;
+				}
+				&__logout{
+					margin-left: 1em;
 				}
 			}
 		}
@@ -210,7 +218,9 @@
 			}
 			&__item {
 				float: left;
-				color: #fff;
+				a{
+					color: #fff;
+				}
 			}
 		}
 	}
