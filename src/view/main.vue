@@ -1,49 +1,50 @@
 <template>
-    <el-row class="container">
+    <div class="container">
 
     <!--顶部栏-->
-    <el-col :span="24" class="container__header" ref="container-header">
+    <!-- <el-col :span="24" class="container__header" ref="container-header">
         <section class="container__limitWidth">
+			
         </section>
-    </el-col>
+    </el-col> -->
 
-    <!--正文栏-->
-    <el-col :span="24" id="containerBody" v-bind:class="[ !!$route.meta.showMainPageBg ? 'has-body-bg' : '' ,'container__body']" ref="container-body">
+    <!--内容栏-->
+    <!-- <el-col :span="24" id="containerBody">
         <section class="container__limitWidth">
-            <!--侧边栏-->
-            <aside class="container__aside">
-                <!-- <home-aside></home-aside> -->
-            </aside>
-            <!--内容栏-->
-            <section id="containerContent" class="container__content container__discard-margin-collapse">
-                <!--面包屑-->
-                <!-- <bread-crumb></bread-crumb> -->
-                <!--其他内容-->
-                <transition name="fade" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </section>
+            <transition name="fade" mode="out-in">
+				<router-view></router-view>
+			</transition>
         </section>
-    </el-col>
+    </el-col> -->
 
     <!--底部栏-->
-    <el-col :span="24" class="container__footer" ref="container-footer">
+    <!-- <el-col :span="24" class="container__footer" ref="container-footer">
         <section class="container__limitWidth">
         </section>
-        <!--备案栏-->
         <section class="container__record">
             <section class="container__limitWidth">
-                <!-- <home-record></home-record> -->
             </section>
         </section>
-    </el-col>
+    </el-col> -->
 
-    </el-row>
+		<!-- 顶部导航条 -->
+		<home-header></home-header>
+
+		<!-- 网站内容 -->
+		<main>
+            <transition name="fade" mode="out-in">
+				<router-view></router-view>
+			</transition>
+        </main>
+    </div>
 </template>
 
 <script>
+import HomeHeader from '@/components/page-common/HomeHeader.vue';
 export default {
-    
+    components:{
+		'home-header': HomeHeader,
+	},
     data(){
         return {
             
@@ -59,4 +60,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container{
+}
 </style>

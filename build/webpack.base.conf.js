@@ -27,6 +27,10 @@ module.exports = {
     alias: {
 	  "@": resolve("src"),
 	  assets: resolve("src/assets"),
+      scss: resolve("src/assets/scss"),
+      img: resolve("src/assets/img"),
+      components: resolve("src/components"),
+      api: resolve("src/api")
     }
   },
   module: {
