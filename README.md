@@ -18,4 +18,21 @@ npm run build
 npm run build --report
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+账号： 123 ， 密码： 123456
+
+已经在webpack的配置开了代理：
+
+```js
+proxyTable: {
+	"/api": {
+		target: "http://120.24.63.55:9090/crEmgcy120/",
+		changeOrigin: true,
+		pathRewrite: {
+			"^/api": ""
+		}
+	}
+},
+```
+
+
+发送请求时，url这样写：/api/请求的路径（相当于 /api 是个模板字符串变量，/api = "http://120.24.63.55:9090/crEmgcy120/"）
