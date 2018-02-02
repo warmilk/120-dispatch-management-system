@@ -8,57 +8,70 @@
 			<nav class="nav">
 				<ul>
 					<!-- 一级菜单 -->
-					<li class="nav__item" :class="{'nav__item_active': activeMenu == 1}" @click="activeMenu = 1" @mouseover="activeMenu = 1">
+					<li class="nav__item" :class="{'nav__item_active': activeMenu == 1}" @click="activeMenu = 1" @mouseover="activeMenu = 1, activeSubMenu = 1.1">
 						{{`呼叫管理`}}
 						<!-- 二级菜单 -->
 						<ul class="nav__subnav" v-if="activeMenu == 1">
 							<li @click="activeMenu = 1, activeSubMenu = 1.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.1}" href="#/call/index">二级菜单啊啊</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.1}" href="#/call/index">{{`呼叫首页`}}</a>
 							</li>
-							<li>
-								<a class="nav__subnav-item" href="#/call/record">二级菜单</a>
+							<li @click="activeMenu = 1, activeSubMenu = 1.2">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.2}" href="#/call/record">{{`通话记录`}}</a>
 							</li>
-							<li>
-								<a class="nav__subnav-item" href="#/call/blacklist">二级菜单</a>
+							<li @click="activeMenu = 1, activeSubMenu = 1.3">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.3}" href="#/call/blacklist">{{`黑名单管理`}}</a>
 							</li>
 						</ul>
 					</li>
 					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 2" @mouseover="activeMenu = 2">
+					<li class="nav__item" @click="activeMenu = 2" @mouseover="activeMenu = 2, activeSubMenu = 2.1" :class="{'nav__item_active': activeMenu == 2}">
 						{{`调度管理`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 2">
+							<li @click="activeMenu = 2, activeSubMenu = 2.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.1}" href="#/dispatch/acceptRecord">{{`受理记录`}}</a>
+							</li>
+							<li @click="activeMenu = 2, activeSubMenu = 2.2">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.2}" href="#/call/record">{{`实时位置`}}</a>
+							</li>
+							<li @click="activeMenu = 2, activeSubMenu = 2.3">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.3}" href="#/call/blacklist">{{`导航管理`}}</a>
+							</li>
+						</ul>
 					</li>
 					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 3" @mouseover="activeMenu = 3">
+					<li class="nav__item" @click="activeMenu = 3" @mouseover="activeMenu = 3, activeSubMenu = 3.1" :class="{'nav__item_active': activeMenu == 3}">
 						{{`人员管理`}}
 						<!-- 二级菜单 -->
 						<ul class="nav__subnav" v-if="activeMenu == 3">
-							<li class="nav__subnav-item">
-								二级菜单
-							</li>
-							<li class="nav__subnav-item">
-								二级菜单
-							</li>
-							<li class="nav__subnav-item">
-								二级菜单
-							</li>
-							<li class="nav__subnav-item">
-								二级菜单
+							<li @click="activeMenu = 3, activeSubMenu = 3.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 3.1}" href="#/worker/index">{{`人员管理`}}</a>
 							</li>
 						</ul>
 					</li>
 					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 4" @mouseover="activeMenu = 4">
+					<li class="nav__item" @click="activeMenu = 4" @mouseover="activeMenu = 4, activeSubMenu = 4.1" :class="{'nav__item_active': activeMenu == 4}">
 						{{`应急资源管理`}}
 						<!-- 二级菜单 -->
 						<ul class="nav__subnav" v-if="activeMenu == 4">
-							<li class="nav__subnav-item">
-								二级菜单
+							<li @click="activeMenu = 4, activeSubMenu = 4.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.1}" href="#/resource/car">{{`车辆信息`}}</a>
 							</li>
-							<li class="nav__subnav-item">
-								二级菜单
+							<li @click="activeMenu = 4, activeSubMenu = 4.2">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.2}" href="#/call/record">{{`急救设备`}}</a>
 							</li>
-							<li class="nav__subnav-item">
-								二级菜单
+						</ul>
+					</li>
+					<!-- 一级菜单 -->
+					<li class="nav__item" @click="activeMenu = 5" @mouseover="activeMenu = 5, activeSubMenu = 5.1" :class="{'nav__item_active': activeMenu == 5}">
+						{{`急救监控`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 5">
+							<li @click="activeMenu = 5, activeSubMenu = 5.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 5.1}" href="#/monitor/index">{{`实时监控`}}</a>
+							</li>
+							<li @click="activeMenu = 5, activeSubMenu = 5.2">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 5.2}" href="#/monitor/event">{{`危机事件管理`}}</a>
 							</li>
 						</ul>
 					</li>
@@ -85,16 +98,18 @@
 						id: 1,
 						name: "呼叫管理",
 						path: "call-manage",
-						active: 1,
 						children: [{
+								id: 1.1,
 								name: "呼叫首页",
 								path: "/call/index"
 							},
 							{
+								id: 1.2,
 								name: "通话记录",
 								path: "/call/record"
 							},
 							{
+								id: 1.3,
 								name: "黑名单",
 								path: "/call/blacklist"
 							}
@@ -104,14 +119,16 @@
 						id: 2,
 						name: "调度管理",
 						path: "call-manage",
-						active: 2,
 						children: [{
+								id: 2.1,
 								name: "呼叫首页"
 							},
 							{
+								id: 2.2,
 								name: "通话记录"
 							},
 							{
+								id: 2.3,
 								name: "调度管理"
 							}
 						]
@@ -120,14 +137,16 @@
 						id: 3,
 						name: "人员管理",
 						path: "call-manage",
-						active: 3,
 						children: [{
+								id: 3.1,
 								name: "呼叫首页"
 							},
 							{
+								id: 3.2,
 								name: "通话记录"
 							},
 							{
+								id: 3.3,
 								name: "调度管理"
 							}
 						]
@@ -136,14 +155,16 @@
 						id: 4,
 						name: "应急资源管理",
 						path: "call-manage",
-						active: 4,
 						children: [{
+								id: 4.1,
 								name: "呼叫首页"
 							},
 							{
+								id: 4.2,
 								name: "通话记录"
 							},
 							{
+								id: 4.3,
 								name: "调度管理"
 							}
 						]
@@ -152,14 +173,16 @@
 						id: 5,
 						name: "急救监控",
 						path: "call-manage",
-						active: 5,
 						children: [{
+								id: 5.1,
 								name: "呼叫首页"
 							},
 							{
+								id: 5.2,
 								name: "通话记录"
 							},
 							{
+								id: 5.3,
 								name: "调度管理"
 							}
 						]
@@ -168,14 +191,16 @@
 						id: 6,
 						name: "管理员管理模块",
 						path: "call-manage",
-						active: 6,
 						children: [{
+								id: 6.1,
 								name: "人员管理"
 							},
 							{
+								id: 6.2,
 								name: "紧急通讯录"
 							},
 							{
+								id: 6.3,
 								name: "找回密码"
 							}
 						]
@@ -285,30 +310,6 @@
 				}
 				&__logout {
 					margin-left: 1em;
-				}
-			}
-		}
-		.sub-nav {
-			width: 100%;
-			height: 40px;
-			background: #3B56B6;
-			display: flex;
-			align-items: center;
-			ul {
-				position: absolute;
-			}
-			&__item {
-				float: left;
-				margin: 0 1em;
-				font-size: 13px;
-				padding: 3px 0;
-				border-bottom: 2px solid #3B56B6;
-				&:hover {
-					cursor: pointer;
-					border-bottom: 2px solid #fff;
-				}
-				a {
-					color: #fff;
 				}
 			}
 		}
