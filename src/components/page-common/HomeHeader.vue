@@ -57,7 +57,7 @@
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.1}" href="#/resource/car">{{`车辆信息`}}</a>
 							</li>
 							<li @click="activeMenu = 4, activeSubMenu = 4.2">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.2}" href="#/call/record">{{`急救设备`}}</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.2}" href="#/resource/device">{{`急救设备`}}</a>
 							</li>
 						</ul>
 					</li>
