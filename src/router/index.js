@@ -11,31 +11,31 @@ export default new Router({
 		{
 			path: '/',
 			name: 'login',
-            component: (resolve) => require(['@/view/login/login.vue'], resolve),
+            component: (resolve) => require(['view/login/login.vue'], resolve),
 		},
         {
             path: '/index',
             redirect: '/call/index',
-            component: (resolve) => require(['@/view/main.vue'], resolve),
+            component: (resolve) => require(['view/main.vue'], resolve),
             children: [
 				// 呼叫管理
 				{
                     path: '/call/index',
-                    component: (resolve) => require(['@/view/call/home/index.vue'], resolve),
+                    component: (resolve) => require(['view/call/home/index.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
 				},
 				{
                     path: '/call/record',
-                    component: (resolve) => require(['@/view/call/record/index.vue'], resolve),
+                    component: (resolve) => require(['view/call/record/index.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
 				},
 				{
                     path: '/call/blacklist',
-                    component: (resolve) => require(['@/view/call/blacklist/index.vue'], resolve),
+                    component: (resolve) => require(['view/call/blacklist/index.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
@@ -43,7 +43,7 @@ export default new Router({
 				// 调度管理
                 {
                     path: '/dispatch/acceptRecord',
-                    component: (resolve) => require(['@/view/dispatch/acceptRecord.vue'], resolve),
+                    component: (resolve) => require(['view/dispatch/acceptRecord.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
@@ -51,7 +51,7 @@ export default new Router({
 				// 人员管理
                 {
                     path: '/worker/index',
-                    component: (resolve) => require(['@/view/worker/worker.vue'], resolve),
+                    component: (resolve) => require(['view/worker/worker.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
@@ -59,7 +59,7 @@ export default new Router({
                 // 应急资源管理
                 {
                     path: '/resource/car',
-                    component: (resolve) => require(['@/view/resource/car.vue'], resolve),
+                    component: (resolve) => require(['view/resource/car.vue'], resolve),
                     redirect: {
                         name: 'carList'
                     },
@@ -69,25 +69,25 @@ export default new Router({
                     children: [{
                             path: 'list',
                             name: 'carList',
-                            component: (resolve) => require(['@/view/resource/carList.vue'], resolve)
+                            component: (resolve) => require(['view/resource/carList.vue'], resolve)
                         },{
                             path: 'detail/:id',
                             name: 'carDetail',
-                            component: (resolve) => require(['@/view/resource/carDetail.vue'], resolve)
+                            component: (resolve) => require(['view/resource/carDetail.vue'], resolve)
                         }
                     ]
 				},
 				// 急救监控
 				{
                     path: '/monitor/index',
-                    component: (resolve) => require(['@/view/monitor/monitor.vue'], resolve),
+                    component: (resolve) => require(['view/monitor/monitor.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
 				},
 				{
                     path: '/monitor/event',
-                    component: (resolve) => require(['@/view/monitor/event.vue'], resolve),
+                    component: (resolve) => require(['view/monitor/event.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
@@ -95,7 +95,7 @@ export default new Router({
 				// 管理员管理
 				{
                     path: '/admin/account',
-                    component: (resolve) => require(['@/view/admin/account.vue'], resolve),
+                    component: (resolve) => require(['view/admin/account.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
@@ -103,7 +103,7 @@ export default new Router({
 				// 个人中心
 				{
                     path: '/profile/index',
-                    component: (resolve) => require(['@/view/profile/profile.vue'], resolve),
+                    component: (resolve) => require(['view/profile/profile.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
@@ -112,7 +112,7 @@ export default new Router({
 		},
 		{
 			path: '/404',
-			component: (resolve) => require(['@/view/404.vue'], resolve),
+			component: (resolve) => require(['view/404.vue'], resolve),
 		},
     ]
 })
