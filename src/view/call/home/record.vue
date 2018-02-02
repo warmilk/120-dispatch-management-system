@@ -52,11 +52,13 @@ export default {
 <style lang="scss" scoped>
 
    .records-container {
+	   background: #fff;
      width: 20%;
      height: 518px;
      font-size: 14px;
-     float: left;
-
+	 position: absolute;
+	 z-index: 3;
+	 box-shadow: 0 3px 8px 0 rgba(0,0,0,0.15);
      /** 标题 */
      .records-title {
        a {

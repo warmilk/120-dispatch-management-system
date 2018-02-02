@@ -129,6 +129,13 @@ export default new Router({
                         requireAuth: true
                     }
 				},
+				{
+                    path: '/profile/editPassword',
+                    component: (resolve) => require(['view/profile/editPassword.vue'], resolve),
+                    meta: {
+                        requireAuth: true
+                    }
+				},
             ]
 		},
 		{

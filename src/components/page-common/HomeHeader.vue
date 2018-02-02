@@ -74,21 +74,39 @@
 							</li>
 						</ul>
 					</li>
+					<!-- 一级菜单 -->
+					<li class="nav__item" @click="activeMenu = 6" @mouseover="activeMenu = 6, activeSubMenu = 6.1" :class="{'nav__item_active': activeMenu == 6}">
+						{{`管理员管理`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 6">
+							<li @click="activeMenu = 6, activeSubMenu = 6.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.1}" href="#/monitor/index">{{`人员管理`}}</a>
+							</li>
+							<li @click="activeMenu = 6, activeSubMenu = 6.2">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.2}" href="#/monitor/event">{{`紧急通讯录`}}</a>
+							</li>
+							<li @click="activeMenu = 6, activeSubMenu = 6.3">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.3}" href="#/monitor/event">{{`找回密码`}}</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<!-- 头像 -->
 			<div class="profile">
-				<img class="profile__avatar" src="@/assets/img/user.png" alt="user" />
-				<nav>
-					<ul>
-						<li>
-							<a href="#/profile">个人资料</a>
-						</li>
-						<li>
-							<a href="">修改密码</a>
-						</li>
-					</ul>
-				</nav>
+				<div class="profile__avatar">
+					<img src="@/assets/img/user.png" alt="user" @click="profileNavVisable = !profileNavVisable" @mouseover="profileNavVisable = true" />
+					<nav class="profile__nav" v-show="profileNavVisable">
+						<ul>
+							<li @click="profileNavVisable = !profileNavVisable">
+								<a href="#/profile/index">个人资料</a>
+							</li>
+							<li @click="profileNavVisable = !profileNavVisable">
+								<a href="#/profile/editPassword">修改密码</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
 				<a class="profile__logout" href="#" @click="logout">退出</a>
 			</div>
 		</div>
@@ -100,6 +118,7 @@
 	export default {
 		data() {
 			return {
+				profileNavVisable: false,
 				activeMenu: 1,
 				activeSubMenu: 1.1,
 				subMenu: [],
@@ -147,10 +166,9 @@
 						name: "人员管理",
 						path: "call-manage",
 						children: [{
-								id: 3.1,
-								name: "人员管理"
-							},
-						]
+							id: 3.1,
+							name: "人员管理"
+						}, ]
 					},
 					{
 						id: 4,
@@ -233,6 +251,11 @@
 </script>
 
 <style lang="scss" scoped>
+	@mixin Hcenter() {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 	.header {
 		width: 100%;
 		height: 112px;
@@ -297,9 +320,44 @@
 				align-items: center;
 				border-left: 1px solid #ddd;
 				&__avatar {
+					position: relative;
 					width: 32px;
 					height: 32px;
 					border-radius: 100px;
+					&:hover {
+						cursor: pointer;
+					}
+				}
+				&__nav {
+					z-index: 99;
+					box-shadow: 0 0 5px #dfdfdf;
+					text-align: center;
+					width: 100px;
+					top: 43px;
+					background: #fff;
+					border-radius: 5px;
+					@include Hcenter();
+					&::before {
+						content: '';
+						@include Hcenter();
+						top: -20px;
+						border-color: transparent transparent #fff transparent;
+						border-width: 10px 10px 10px 10px;
+						border-style: solid;
+						width: 0;
+						height: 0;
+					}
+					a {
+						display: block;
+						padding: 10px 0;
+						border-radius: 5px;
+						&:hover {
+							background: #dfdfdf;
+						}
+						&:active {
+							color: #000;
+						}
+					}
 				}
 				&__logout {
 					margin-left: 1em;
