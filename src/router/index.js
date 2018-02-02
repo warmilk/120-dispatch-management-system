@@ -21,21 +21,21 @@ export default new Router({
 				// 呼叫管理
 				{
                     path: '/call/index',
-                    component: (resolve) => require(['@/view/call/callIndex.vue'], resolve),
+                    component: (resolve) => require(['@/view/call/home/index.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
 				},
 				{
                     path: '/call/record',
-                    component: (resolve) => require(['@/view/call/record.vue'], resolve),
+                    component: (resolve) => require(['@/view/call/record/index.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
 				},
 				{
                     path: '/call/blacklist',
-                    component: (resolve) => require(['@/view/call/blacklist.vue'], resolve),
+                    component: (resolve) => require(['@/view/call/blacklist/index.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }

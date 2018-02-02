@@ -1,6 +1,5 @@
 <template>
 	<header class="header">
-		<!-- 顶部大导航条 -->
 		<div class="main-nav">
 			<!-- logo -->
 			<img class="logo" src="@/assets/img/logo-inside.png" alt="logo" />
@@ -121,15 +120,15 @@
 						path: "call-manage",
 						children: [{
 								id: 2.1,
-								name: "呼叫首页"
+								name: "受理记录"
 							},
 							{
 								id: 2.2,
-								name: "通话记录"
+								name: "实时位置"
 							},
 							{
 								id: 2.3,
-								name: "调度管理"
+								name: "导航管理"
 							}
 						]
 					},
@@ -139,16 +138,8 @@
 						path: "call-manage",
 						children: [{
 								id: 3.1,
-								name: "呼叫首页"
+								name: "人员管理"
 							},
-							{
-								id: 3.2,
-								name: "通话记录"
-							},
-							{
-								id: 3.3,
-								name: "调度管理"
-							}
 						]
 					},
 					{
@@ -157,15 +148,11 @@
 						path: "call-manage",
 						children: [{
 								id: 4.1,
-								name: "呼叫首页"
+								name: "车辆资源"
 							},
 							{
 								id: 4.2,
-								name: "通话记录"
-							},
-							{
-								id: 4.3,
-								name: "调度管理"
+								name: "急救设备"
 							}
 						]
 					},
@@ -175,15 +162,11 @@
 						path: "call-manage",
 						children: [{
 								id: 5.1,
-								name: "呼叫首页"
+								name: "实时监控首页"
 							},
 							{
 								id: 5.2,
-								name: "通话记录"
-							},
-							{
-								id: 5.3,
-								name: "调度管理"
+								name: "危机事件管理"
 							}
 						]
 					},
