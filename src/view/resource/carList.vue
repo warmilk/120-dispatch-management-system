@@ -67,6 +67,9 @@
 			},
 			seeDetail(id) {
 				this.$router.push({name: 'carDetail', params:{id}});
+			},
+			filterData() {
+				
 			}
 	  }
 	};
