@@ -79,6 +79,16 @@
 			<!-- 头像 -->
 			<div class="profile">
 				<img class="profile__avatar" src="@/assets/img/user.png" alt="user" />
+				<nav>
+					<ul>
+						<li>
+							<a href="#/profile">个人资料</a>
+						</li>
+						<li>
+							<a href="">修改密码</a>
+						</li>
+					</ul>
+				</nav>
 				<a class="profile__logout" href="#" @click="logout">退出</a>
 			</div>
 		</div>

@@ -6,6 +6,8 @@
 
 <style lang="scss" scoped>
 section{
-	text-align: center;
+	img{
+		width: 100%;
+	}
 }
 </style>

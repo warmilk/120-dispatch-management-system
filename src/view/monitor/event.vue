@@ -1,5 +1,11 @@
 <template>
   <section>
-	  急救监控： 危机事件管理
+	  <img :src="require('assets/layout/C01人员管理-首页.jpg')" alt="">
   </section>
 </template>
+
+<style lang="scss" scoped>
+section{
+	text-align: center;
+}
+</style>
