@@ -60,9 +60,22 @@ export default new Router({
                 {
                     path: '/resource/car',
                     component: (resolve) => require(['@/view/resource/car.vue'], resolve),
+                    redirect: {
+                        name: 'carList'
+                    },
                     meta: {
                         requireAuth: true
-                    }
+                    },
+                    children: [{
+                            path: 'list',
+                            name: 'carList',
+                            component: (resolve) => require(['@/view/resource/carList.vue'], resolve)
+                        },{
+                            path: 'detail/:id',
+                            name: 'carDetail',
+                            component: (resolve) => require(['@/view/resource/carDetail.vue'], resolve)
+                        }
+                    ]
 				},
 				// 急救监控
 				{
