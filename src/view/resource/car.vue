@@ -5,7 +5,7 @@
 				急救站列表
 			</section>
 			<ul class="nav-ul">
-				<li v-for="item in hospitalList" :key="item.id">{{item.name}}</li>
+				<li v-for="(item, index) in hospitalList" :key="item.id" v-bind:class="index==activeIndex? 'active-li':''" @click="activeItemIndex(index)">{{item.name}}</li>
 			</ul>
 		</section>
 		<router-view />
@@ -19,6 +19,7 @@
 	export default {
 	  data() {
 	    return {
+				activeIndex :0,
 	      hospitalList: hospitalList,
 	      carList: carList,
 	      formInline: {
@@ -31,7 +32,10 @@
 	  methods: {
 	    indexMethod(index) {
 	      return index + 1;
-	    }
+			},
+			activeItemIndex(index) {
+				this.activeIndex = index;
+			}
 		},
 		components: {
 			CarListComponent,
@@ -148,7 +152,7 @@
 	      color: #3b56b6;
 	      border-left: 3px solid #3b56b6;
 	    }
-	    .active-li {
+	    &.active-li {
 	      color: #3b56b6;
 	      border-left: 3px solid #3b56b6;
 	    }
