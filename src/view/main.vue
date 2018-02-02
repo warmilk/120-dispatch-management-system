@@ -40,6 +40,7 @@ export default {
 	main{
 		height: auto;
 		min-height: 810px;
+		position: relative;
 	}
 }
 </style>
