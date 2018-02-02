@@ -74,6 +74,22 @@
 							</li>
 						</ul>
 					</li>
+					<!-- 一级菜单 -->
+					<li class="nav__item" @click="activeMenu = 6" @mouseover="activeMenu = 6, activeSubMenu = 6.1" :class="{'nav__item_active': activeMenu == 6}">
+						{{`管理员管理`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 6">
+							<li @click="activeMenu = 6, activeSubMenu = 6.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.1}" href="#/monitor/index">{{`人员管理`}}</a>
+							</li>
+							<li @click="activeMenu = 6, activeSubMenu = 6.2">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.2}" href="#/monitor/event">{{`紧急通讯录`}}</a>
+							</li>
+							<li @click="activeMenu = 6, activeSubMenu = 6.3">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.3}" href="#/monitor/event">{{`找回密码`}}</a>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<!-- 头像 -->
