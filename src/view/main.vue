@@ -8,14 +8,18 @@
 				<router-view></router-view>
 			</transition>
         </main>
+		<!-- 底部版权栏 -->
+		<home-footer></home-footer>
     </div>
 </template>
 
 <script>
 import HomeHeader from '@/components/page-common/HomeHeader.vue';
+import HomeFooter from '@/components/page-common/HomeFooter.vue';
 export default {
     components:{
 		'home-header': HomeHeader,
+		'home-footer': HomeFooter,
 	},
     data(){
         return {
@@ -33,5 +37,9 @@ export default {
 
 <style lang="scss" scoped>
 .container{
+	main{
+		height: auto;
+		min-height: 810px;
+	}
 }
 </style>

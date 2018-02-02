@@ -26,11 +26,12 @@ module.exports = {
 	// 配置缩写别名
     alias: {
 	  "@": resolve("src"),
+	  view: resolve("src/view"),
+      components: resolve("src/components"),
+      api: resolve("src/api"),
 	  assets: resolve("src/assets"),
       scss: resolve("src/assets/scss"),
       img: resolve("src/assets/img"),
-      components: resolve("src/components"),
-      api: resolve("src/api")
     }
   },
   module: {
