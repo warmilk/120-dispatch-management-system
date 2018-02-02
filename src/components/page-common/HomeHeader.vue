@@ -1,14 +1,66 @@
 <template>
 	<header class="header">
 		<!-- 顶部大导航条 -->
-		<header class="main-nav">
+		<div class="main-nav">
 			<!-- logo -->
 			<img class="logo" src="@/assets/img/logo-inside.png" alt="logo" />
 			<!-- 大导航条 -->
 			<nav class="nav">
 				<ul>
-					<li class="nav__item" v-for="(item, index) in menuList" :key="item.index" v-on:click="pickSubMenu(index)" v-bind:class="{'header-active': showActive(item)}">
-						{{item.name}}
+					<!-- 一级菜单 -->
+					<li class="nav__item" :class="{'nav__item_active': activeMenu == 1}" @click="activeMenu = 1" @mouseover="activeMenu = 1">
+						{{`呼叫管理`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 1">
+							<li @click="activeMenu = 1, activeSubMenu = 1.1">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.1}" href="#/call/index">二级菜单啊啊</a>
+							</li>
+							<li>
+								<a class="nav__subnav-item" href="#/call/record">二级菜单</a>
+							</li>
+							<li>
+								<a class="nav__subnav-item" href="#/call/blacklist">二级菜单</a>
+							</li>
+						</ul>
+					</li>
+					<!-- 一级菜单 -->
+					<li class="nav__item" @click="activeMenu = 2" @mouseover="activeMenu = 2">
+						{{`调度管理`}}
+					</li>
+					<!-- 一级菜单 -->
+					<li class="nav__item" @click="activeMenu = 3" @mouseover="activeMenu = 3">
+						{{`人员管理`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 3">
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+						</ul>
+					</li>
+					<!-- 一级菜单 -->
+					<li class="nav__item" @click="activeMenu = 4" @mouseover="activeMenu = 4">
+						{{`应急资源管理`}}
+						<!-- 二级菜单 -->
+						<ul class="nav__subnav" v-if="activeMenu == 4">
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+							<li class="nav__subnav-item">
+								二级菜单
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</nav>
@@ -17,15 +69,7 @@
 				<img class="profile__avatar" src="@/assets/img/user.png" alt="user" />
 				<a class="profile__logout" href="#" @click="logout">退出</a>
 			</div>
-		</header>
-		<!-- 底部小导航条 -->
-		<nav class="sub-nav">
-			<ul>
-				<li class="sub-nav__item" v-for="item in subMenu" :key="item.index">
-					<router-link :to="item.path">{{item.name}}</router-link>
-				</li>
-			</ul>
-		</nav>
+		</div>
 	</header>
 </template>
 
@@ -34,24 +78,25 @@
 	export default {
 		data() {
 			return {
+				activeMenu: 1,
+				activeSubMenu: 1.1,
 				subMenu: [],
-				menuList: [
-					{
+				menuList: [{
 						id: 1,
 						name: "呼叫管理",
 						path: "call-manage",
 						active: 1,
 						children: [{
 								name: "呼叫首页",
-								path: "/call-manage"
+								path: "/call/index"
 							},
 							{
 								name: "通话记录",
-								path: "/call-record"
+								path: "/call/record"
 							},
 							{
 								name: "黑名单",
-								path: "/black-list"
+								path: "/call/blacklist"
 							}
 						]
 					},
@@ -172,10 +217,12 @@
 <style lang="scss" scoped>
 	.header {
 		width: 100%;
+		height: 112px;
+		background: #3B56B6;
 		.main-nav {
-			$headerHeight: 72px;
+			background: #fff;
+			$headerHeight: 68px;
 			height: $headerHeight;
-			overflow: hidden;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -184,41 +231,83 @@
 				margin-left: 6%;
 			}
 			.nav {
+				// 一级菜单
 				&__item {
-					float: left;
+					display: inline-block;
+					position: relative;
 					margin: 0 10px;
-					padding: 10px 0;
+					padding: 12px 0;
 					border-bottom: 3px solid #fff;
 					cursor: pointer;
-					&:hover{
+					&_active,
+					&:active,
+					&:hover {
 						border-bottom: 3px solid #3B56B6;
+					}
+				}
+				&__subnav {
+					// 二级菜单
+					position: absolute;
+					left: 50%;
+					transform: translateX(-50%);
+					z-index: 10;
+					top: 65px;
+					display: flex;
+					justify-content: space-between;
+					&-item {
+						text-align: center;
+						width: 6em; //有bug
+						color: #fff;
+						font-size: 13px;
+						display: inline-block;
+						margin: 0 2em;
+						padding: 3px 0;
+						border-bottom: 2px solid #3B56B6;
+						&_active,
+						&:active,
+						&:hover {
+							cursor: pointer;
+							border-bottom: 2px solid #fff;
+						}
 					}
 				}
 			}
 			.profile {
-				margin-right: 8%;
+				margin-right: 6%;
+				padding-left: 1.5%;
 				display: flex;
 				align-items: center;
+				border-left: 1px solid #ddd;
 				&__avatar {
 					width: 32px;
 					height: 32px;
 					border-radius: 100px;
 				}
-				&__logout{
+				&__logout {
 					margin-left: 1em;
 				}
 			}
 		}
 		.sub-nav {
 			width: 100%;
-			height: 36px;
+			height: 40px;
 			background: #3B56B6;
+			display: flex;
+			align-items: center;
 			ul {
-				color: #fff;
+				position: absolute;
 			}
 			&__item {
 				float: left;
-				a{
+				margin: 0 1em;
+				font-size: 13px;
+				padding: 3px 0;
+				border-bottom: 2px solid #3B56B6;
+				&:hover {
+					cursor: pointer;
+					border-bottom: 2px solid #fff;
+				}
+				a {
 					color: #fff;
 				}
 			}
