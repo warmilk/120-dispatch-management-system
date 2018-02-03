@@ -1,5 +1,19 @@
 <template>
-  <section>
-	  调度管理·实时位置
-  </section>
+  <div>
+    
+  </div>
 </template>
+<style lang="stylus" rel="stylesheet/stylus" type="text/stylus" scoped>
+</style>
+<script>
+  export default {
+    data() {
+      return {
+        msg: 'hello vue'
+      }
+    },
+    components: {
+    
+    }
+  }
+</script>

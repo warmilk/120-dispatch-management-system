@@ -58,6 +58,16 @@ export default new Router({
                 component: (resolve) => require(['view/dispatch/page/details/details.vue'], resolve)
             }]
         },
+        // 实时位置
+        {
+            path: "/dispatch/realTimePosition",
+            component: resolve => require(["view/dispatch/realTimePosition.vue"], resolve),
+        },
+        // 导航管理
+        {
+            path: "/dispatch/navigationManage",
+            component: resolve => require(["view/dispatch/navigationManage.vue"], resolve),
+        },
         // 人员管理
         {
           path: "/worker",

@@ -31,10 +31,10 @@
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.1}" href="#/dispatch/acceptRecord">{{`受理记录`}}</a>
 							</li>
 							<li @click="activeMenu = 2, activeSubMenu = 2.2">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.2}" href="#/call/record">{{`实时位置`}}</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.2}" href="#/dispatch/realTimePosition">{{`实时位置`}}</a>
 							</li>
 							<li @click="activeMenu = 2, activeSubMenu = 2.3">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.3}" href="#/call/blacklist">{{`导航管理`}}</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.3}" href="#/dispatch/navigationManage">{{`导航管理`}}</a>
 							</li>
 						</ul>
 					</li>
