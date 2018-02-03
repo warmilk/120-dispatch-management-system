@@ -1,11 +1,14 @@
 <template>
   <div>
-    <router-view></router-view>
+    <searchBox></searchBox>
+    <aTable></aTable>
   </div>
 </template>
 <style lang="stylus" rel="stylesheet/stylus" type="text/stylus" scoped>
 </style>
 <script>
+import searchBox from '../../search-box/search-box'
+import aTable from '../../table/table'
   export default {
     data() {
       return {
@@ -13,7 +16,8 @@
       }
     },
     components: {
-    
+      searchBox,
+      aTable
     }
   }
 </script>

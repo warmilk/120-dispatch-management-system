@@ -17,26 +17,26 @@ p{word-break: break-all;}
   *zoom:1;/*IE/7/6*/
 }
 
-@media (max-width: 1023px) {
-  * {
-    font-size: 10px;
-  }
-}
-@media (min-width: 1024px) and (max-width: 1200px) {
-  *{
-    font-size: 12px;
-  }
-}
-@media (min-width: 1201px) and (max-width: 1500px) {
-  * {
-    font-size: 14px;
-  }
-}
-@media (min-width: 1501px) and (max-width: 1920px) {
-  * {
-    font-size: 16px;
-  }
-}
+// @media (max-width: 1023px) {
+  // * {
+  //   font-size: 10px;
+  // }
+// }
+// @media (min-width: 1024px) and (max-width: 1200px) {
+//   *{
+//     font-size: 12px;
+//   }
+// }
+// @media (min-width: 1201px) and (max-width: 1500px) {
+//   * {
+//     font-size: 14px;
+//   }
+// }
+// @media (min-width: 1501px) and (max-width: 1920px) {
+//   * {
+//     font-size: 16px;
+//   }
+// }
 
 .icon {
   width: 1rem; height: 1rem;

@@ -44,9 +44,19 @@ export default new Router({
                 {
                     path: '/dispatch/acceptRecord',
                     component: (resolve) => require(['view/dispatch/acceptRecord.vue'], resolve),
+                    redirect: '/dispatch/acceptRecord/table',
                     meta: {
                         requireAuth: true
-                    }
+                    },
+                    children: [{
+                        path: '/dispatch/acceptRecord/table',
+                        name: 'details',
+                        component: (resolve) => require(['view/dispatch/page/table/table.vue'], resolve)
+                    },{
+                        path: '/dispatch/acceptRecord/details',
+                        name: 'details',
+                        component: (resolve) => require(['view/dispatch/page/details/details.vue'], resolve)
+                    }]
 				},
 				// 人员管理
                 {

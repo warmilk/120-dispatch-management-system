@@ -67,8 +67,8 @@
   </el-form-item>
 </el-form>
   <div class="btn-con" flex="main:center">
-    <div class="grey-button">导出记录</div>
-    <div class="grey-button">筛选</div>
+    <greyButton>导出记录</greyButton>
+    <greyButton>筛选</greyButton>
   </div>
   </div>
 </template>
@@ -89,23 +89,10 @@
     margin 0 10px 17px;
 .btn-con    
   margin-bottom 23px
-  .grey-button
-    height 34px;
-    width 152px;
-    background: #f5f7fa;
-    text-align center 
-    line-height 34px
-    border: 1px solid #D9D9D9;
-    border-radius: 3px;
-    font-size: 12px;
-    color: #666;
-    margin 0 15px;
-    cursor pointer
-    &:hover
-      background #f6f6f6
 </style>
 
 <script>
+import greyButton from '../button/grey-button'
   export default {
     data() {
       return {
@@ -132,6 +119,8 @@
         value: ''
       }
     },
-    components: {}
+    components: {
+      greyButton
+    }
   }
 </script>
