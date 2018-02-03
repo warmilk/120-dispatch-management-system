@@ -27,12 +27,13 @@ export default {
 <style lang="scss" scoped>
 
    .phone-container {
+	   position: absolute;
+	   z-index: 3;
       box-sizing: border-box;
       width: 20%;
       height: 518px;
       font-size: 14px;
       background: #8d7373;
-      float: right;
-     
+	  right: 0;
    }
 </style>

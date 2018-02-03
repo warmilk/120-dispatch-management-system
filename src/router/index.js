@@ -56,7 +56,7 @@ export default new Router({
                         requireAuth: true
                     }
 				},
-                // 应急资源管理
+                // 应急资源管理 -> 车辆管理
                 {
                     path: '/resource/car',
                     component: (resolve) => require(['view/resource/car.vue'], resolve),
@@ -74,6 +74,27 @@ export default new Router({
                             path: 'detail/:id',
                             name: 'carDetail',
                             component: (resolve) => require(['view/resource/carDetail.vue'], resolve)
+                        }
+                    ]
+                },
+                // 应急资源管理 -> 设备管理
+                {
+                    path: '/resource/device',
+                    component: (resolve) => require(['@/view/resource/device.vue'], resolve),
+                    redirect: {
+                        name: 'deviceList'
+                    },
+                    meta: {
+                        requireAuth: true
+                    },
+                    children: [{
+                            path: 'list',
+                            name: 'deviceList',
+                            component: (resolve) => require(['@/view/resource/deviceList.vue'], resolve)
+                        },{
+                            path: 'detail/:id',
+                            name: 'deviceDetail',
+                            component: (resolve) => require(['@/view/resource/deviceDetail.vue'], resolve)
                         }
                     ]
 				},
@@ -99,11 +120,26 @@ export default new Router({
                     meta: {
                         requireAuth: true
                     }
+                },
+                // 管理员管理 -> 详情
+				{
+                    path: '/admin/account/detail/:id',
+                    component: (resolve) => require(['view/admin/accountDetail.vue'], resolve),
+                    meta: {
+                        requireAuth: true
+                    }
 				},
 				// 个人中心
 				{
                     path: '/profile/index',
                     component: (resolve) => require(['view/profile/profile.vue'], resolve),
+                    meta: {
+                        requireAuth: true
+                    }
+				},
+				{
+                    path: '/profile/editPassword',
+                    component: (resolve) => require(['view/profile/editPassword.vue'], resolve),
                     meta: {
                         requireAuth: true
                     }
