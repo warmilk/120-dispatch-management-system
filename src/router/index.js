@@ -120,6 +120,14 @@ export default new Router({
                     meta: {
                         requireAuth: true
                     }
+                },
+                // 管理员管理 -> 详情
+				{
+                    path: '/admin/account/detail/:id',
+                    component: (resolve) => require(['view/admin/accountDetail.vue'], resolve),
+                    meta: {
+                        requireAuth: true
+                    }
 				},
 				// 个人中心
 				{
