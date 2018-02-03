@@ -14,7 +14,7 @@
 							<li @click="activeMenu = 1, activeSubMenu = 1.1">
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.1}" href="#/call/index">{{`呼叫首页`}}</a>
 							</li>
-							<li @click="activeMenu = 1, activeSubMenu = 1.2">
+							<li @click="activeMenu = 1, activeSubMenu = 1.2, sessionStorage.setItem('activeMenu', '1.2')">
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.2}" href="#/call/record">{{`通话记录`}}</a>
 							</li>
 							<li @click="activeMenu = 1, activeSubMenu = 1.3">
@@ -44,7 +44,7 @@
 						<!-- 二级菜单 -->
 						<ul class="nav__subnav" v-if="activeMenu == 3">
 							<li @click="activeMenu = 3, activeSubMenu = 3.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 3.1}" href="#/worker/index">{{`人员管理`}}</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 3.1}" href="#/worker">{{`人员管理`}}</a>
 							</li>
 						</ul>
 					</li>
@@ -80,7 +80,7 @@
 						<!-- 二级菜单 -->
 						<ul class="nav__subnav" v-if="activeMenu == 6">
 							<li @click="activeMenu = 6, activeSubMenu = 6.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.1}" href="#/monitor/index">{{`人员管理`}}</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.1}" href="#/admin/account">{{`人员管理`}}</a>
 							</li>
 							<li @click="activeMenu = 6, activeSubMenu = 6.2">
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.2}" href="#/monitor/event">{{`紧急通讯录`}}</a>
@@ -247,6 +247,14 @@
 				});
 			}
 		},
+		created () {
+			
+		},
+		// 页面刷新自动选中导航
+		mounted(){
+			this.activeMenu = parseInt(sessionStorage.getItem('activeMenu'));
+			this.activeSubMenu = Number(sessionStorage.getItem('activeSubMenu'));
+		}
 	};
 </script>
 
