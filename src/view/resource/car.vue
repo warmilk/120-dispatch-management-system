@@ -117,12 +117,6 @@
 
 
 <style lang="scss" scoped>
-	* {
-	  margin: 0;
-	  padding: 0;
-	  box-sizing: border-box;
-	}
-
 	.left-nav {
 	  width: 20%;
 	  float: left;
