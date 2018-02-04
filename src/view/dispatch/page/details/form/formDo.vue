@@ -5,20 +5,20 @@
       <div class="select-con">
         <el-form :inline="true" :model="formInline" label-width="100px" flex="main:justify wrap:wrap">
           <el-form-item label="调度性质" class="form-item">
-            <el-select size="medium" v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select size="medium" v-model="v1" placeholder="请选择">
+              <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="接诊急救站" class="form-item">
-            <el-select size="medium" v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select size="medium" v-model="v2" placeholder="请选择">
+              <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="车辆数量" class="form-item">
-            <el-select size="medium" v-model="value" placeholder="请选择">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            <el-select size="medium" v-model="v3" placeholder="请选择">
+              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </el-form-item>
@@ -61,23 +61,45 @@
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
+        v1: '1',
+        v2: '1',
+        v3: '1',
+        options1: [{
+          value: '1',
+          label: '改派订单'
+        },
+        {
+          value: '2',
+          label: '增派支援'
+        },
+        {
+          value: '1',
+          label: '再次调度'
         }],
-        value: ''
+        options2: [{
+          value: '1',
+          label: '中医院120急救站'
+        },
+        {
+          value: '2',
+          label: '人民医院急救站'
+        }],
+        options3: [{
+          value: '1',
+          label: '1'
+        },
+        {
+          value: '2',
+          label: '2'
+        },
+        {
+          value: '3',
+          label: '3'
+        },
+        {
+          value: '4',
+          label: '4'
+        }]
       }
     },
     components: {
