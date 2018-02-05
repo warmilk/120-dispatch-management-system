@@ -26,7 +26,7 @@
 						{{item.name}}
 						<ul class="nav__subnav" v-if="activeMenu == (index+1) && item.children">
 							<li v-for="(subItem, subIndex) in item.children" :key="subIndex" @click="activeMenu = calActiveMenu(index), activeSubMenu = calActiveSubMenu(index, subIndex)">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu ==  calActiveSubMenu(index, subIndex)}" :href="'#' + subItem.path">{{subItem.name}}</a>
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu ==  calActiveSubMenu(index, subIndex)}" :href="`#${subItem.path}`">{{subItem.name}}</a>
 							</li>
 						</ul>
 					</li>
