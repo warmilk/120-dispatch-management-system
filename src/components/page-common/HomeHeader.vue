@@ -69,9 +69,9 @@
 							<li @click="activeMenu = 5, activeSubMenu = 5.1">
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 5.1}" href="#/monitor/index">{{`实时监控`}}</a>
 							</li>
-							<li @click="activeMenu = 5, activeSubMenu = 5.2">
+							<!-- <li @click="activeMenu = 5, activeSubMenu = 5.2">
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 5.2}" href="#/monitor/event">{{`危机事件管理`}}</a>
-							</li>
+							</li> -->
 						</ul>
 					</li>
 					<!-- 一级菜单 -->
