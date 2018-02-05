@@ -4,7 +4,7 @@
       <span class="nav-title">账号管理 > 资料编辑</span>
       <router-link to="12" class="back-link">返回</router-link>
     </section>
-    <section>
+    <section class="main-content">
       <section class="content-form">
         <el-form ref="form" :model="form" label-width="80px" size="small" style="padding:3rem 4rem;">
           <el-form-item label="邮箱账号">
@@ -35,15 +35,27 @@
         </el-form>
       </section>
       <section class="content-upload">
-        <form>
-          <label>头像</label>
-        </form>
+          <div class="upload-lable">
+            <span style="color:red;">*</span>用户头像
+          </div>
+          <div class="upload-tip" style="width:300px;display:inline-block;">
+            <div>上传图片的最佳尺寸：300像素*300像素，其他尺寸会影响页效果，格式png，jpeg，jpg，gif。大小不超过1M</div>
+            <div style="margin-top:30px;">
+              <el-button :disabled="diableUpload" @click="showUploadDialog">立即上传</el-button>
+              <UploadAvatar ref="uploadAvatar" @uploadAvatar="uploadAvatar"></UploadAvatar>
+            </div>
+            <div class="upload-avatar" @click="showUploadDialog">
+              <img :src="preview.url" class="avatar-preview" v-if="preview.show"/>
+              <button class="avatar-delete" v-if="showDelete" @click="deletePreview">删除</button>
+            </div>
+          </div>
       </section>
     </section>
   </section>
 </template>
 
 <script>
+  import UploadAvatar from 'components/upload/uploadAvatar';
   export default {
     data() {
       return {
@@ -55,6 +67,13 @@
           name: "",
           phoneNo: "",
           status: ""
+        },
+        diableUpload: true,
+        showDelete: false,
+        preview:{ 
+          show: false,
+          url : '',
+          srcData: ''
         }
       };
     },
@@ -63,6 +82,41 @@
         return index + 1;
       },
       filterData() {},
+      uploadAvatar(data) {
+        this.preview.url = window.URL.createObjectURL(data) ;
+        this.preview.srcData = data;
+        this.preview.show = true;
+        this.toggleStatus();
+      },
+      showUploadDialog() {
+        this.$refs.uploadAvatar.dialogVisible = true;
+      },
+      deletePreview(e) {
+        e.stopPropagation();
+        this.preview = {
+          show: false,
+          url: '',
+          srcData: ''
+        }
+        this.toggleStatus();
+      },
+      toggleStatus() {
+        this.diableUpload = !!!this.diableUpload;
+        this.showDelete = !!!this.showDelete
+      },
+      initPreview(data){
+        if (data) {
+          
+        }
+        return { 
+          show: false,
+          url : '',
+          srcData: ''
+        };
+      }
+    },
+    components: {
+      UploadAvatar
     }
   };
 
@@ -118,12 +172,51 @@
     margin: 6px 20px;
   }
   .content-form {
-    display: inline-block;
     width: 55%;
+    display: inline-block;
   }
   .content-upload {
+
+    padding: 30px 20px;
     display: inline-block;
-    width: 40%;
-    padding: 2rem 3rem;
+    vertical-align: top;
+  }
+  .upload-lable {
+    display: inline-block;
+    width: 150px;
+    vertical-align: top;
+  }
+  .upload-tip{
+    width:300px;
+    display:inline-block;
+  }
+  .upload-avatar{
+    width:184px;
+    height:184px;
+    background:#f6f6f6;
+    border:1px solid #D9D9D9;
+    position:relative;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+  .avatar-delete{
+    width:182px; 
+    height:30px; 
+    text-align:center;
+    line-height:30px; 
+    position:absolute; 
+    bottom: 0px; 
+    display:inline-block;
+    color: white;
+    background-color:rgba(0,0,0,0.3);
+    // z-index: 9999;
+    border: none;
+    &:visited {
+      color: white;
+    }
+  }
+  .avatar-preview{
+    width:184px;
+    height:184px;
   }
 </style>
