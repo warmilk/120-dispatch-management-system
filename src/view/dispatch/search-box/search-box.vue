@@ -75,7 +75,7 @@
 <style lang="stylus" rel="stylesheet/stylus" type="text/stylus">
 .acceptRecord-form-com
   .el-input
-    width 180px
+    width 180px !important
 .label-wid-98
   .el-form-item__label
     width 98px    
