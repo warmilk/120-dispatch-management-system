@@ -170,7 +170,7 @@
 	          name: "医院"
 	        }
 	      ],
-	      regions: [{id : 1,itemValue:'乳城区',}, {id : 1,itemValue:'一六镇',},{id : 1,itemValue:'大布镇',}],
+	      regions: [{id : 1,itemValue:'乳城区',}, {id : 2,itemValue:'一六镇',},{id : 3,itemValue:'大布镇',}],
 	      form: {
 	        patientName: "",
 	        patientSex: "1",
