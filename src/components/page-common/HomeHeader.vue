@@ -6,108 +6,42 @@
 			<!-- 大导航条 -->
 			<nav class="nav">
 				<ul>
-					<!-- 一级菜单 -->
-					<li class="nav__item" :class="{'nav__item_active': activeMenu == 1}" @click="activeMenu = 1" @mouseover="activeMenu = 1, activeSubMenu = 1.1">
-						{{`呼叫管理`}}
-						<!-- 二级菜单 -->
-						<ul class="nav__subnav" v-if="activeMenu == 1">
-							<li @click="activeMenu = 1, activeSubMenu = 1.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.1}" href="#/call/index">{{`呼叫首页`}}</a>
+					<template v-for="(item, index) in menuList">
+						<template v-for="(cItem, cIndex) in item.children">
+							<!-- 一级菜单 -->
+							<li class="nav__item" :class="{'nav__item_active': activeMenu == item.id}" @click="activeMenu = item.id" @mouseover="activeMenu = item.id, activeSubMenu = cItem.id" :key="index">
+								{{`${item.name}`}}
+								<!-- 二级菜单 -->
+								<ul class="nav__subnav" v-if="activeMenu == item.id">
+									<li @click="activeMenu = item.id, activeSubMenu = cItem.id" :key="cIndex">
+										<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == cItem.id}" href="#/call/index">{{`${cItem.name}`}}</a>
+									</li>
+								</ul>
 							</li>
-							<li @click="activeMenu = 1, activeSubMenu = 1.2, sessionStorage.setItem('activeMenu', '1.2')">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.2}" href="#/call/record">{{`通话记录`}}</a>
-							</li>
-							<li @click="activeMenu = 1, activeSubMenu = 1.3">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.3}" href="#/call/blacklist">{{`黑名单管理`}}</a>
-							</li>
-						</ul>
-					</li>
-					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 2" @mouseover="activeMenu = 2, activeSubMenu = 2.1" :class="{'nav__item_active': activeMenu == 2}">
-						{{`调度管理`}}
-						<!-- 二级菜单 -->
-						<ul class="nav__subnav" v-if="activeMenu == 2">
-							<li @click="activeMenu = 2, activeSubMenu = 2.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.1}" href="#/dispatch/acceptRecord">{{`受理记录`}}</a>
-							</li>
-							<li @click="activeMenu = 2, activeSubMenu = 2.2">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.2}" href="#/dispatch/realTimePosition">{{`实时位置`}}</a>
-							</li>
-							<li @click="activeMenu = 2, activeSubMenu = 2.3">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 2.3}" href="#/dispatch/navigationManage">{{`导航管理`}}</a>
-							</li>
-						</ul>
-					</li>
-					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 3" @mouseover="activeMenu = 3, activeSubMenu = 3.1" :class="{'nav__item_active': activeMenu == 3}">
-						{{`人员管理`}}
-						<!-- 二级菜单 -->
-						<ul class="nav__subnav" v-if="activeMenu == 3">
-							<li @click="activeMenu = 3, activeSubMenu = 3.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 3.1}" href="#/worker">{{`人员管理`}}</a>
-							</li>
-						</ul>
-					</li>
-					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 4" @mouseover="activeMenu = 4, activeSubMenu = 4.1" :class="{'nav__item_active': activeMenu == 4}">
-						{{`应急资源管理`}}
-						<!-- 二级菜单 -->
-						<ul class="nav__subnav" v-if="activeMenu == 4">
-							<li @click="activeMenu = 4, activeSubMenu = 4.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.1}" href="#/resource/car">{{`车辆信息`}}</a>
-							</li>
-							<li @click="activeMenu = 4, activeSubMenu = 4.2">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 4.2}" href="#/resource/device">{{`急救设备`}}</a>
-							</li>
-						</ul>
-					</li>
-					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 5" @mouseover="activeMenu = 5, activeSubMenu = 5.1" :class="{'nav__item_active': activeMenu == 5}">
-						{{`急救监控`}}
-						<!-- 二级菜单 -->
-						<ul class="nav__subnav" v-if="activeMenu == 5">
-							<li @click="activeMenu = 5, activeSubMenu = 5.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 5.1}" href="#/monitor/index">{{`实时监控`}}</a>
-							</li>
-							<!-- <li @click="activeMenu = 5, activeSubMenu = 5.2">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 5.2}" href="#/monitor/event">{{`危机事件管理`}}</a>
-							</li> -->
-						</ul>
-					</li>
-					<!-- 一级菜单 -->
-					<li class="nav__item" @click="activeMenu = 6" @mouseover="activeMenu = 6, activeSubMenu = 6.1" :class="{'nav__item_active': activeMenu == 6}">
-						{{`管理员管理`}}
-						<!-- 二级菜单 -->
-						<ul class="nav__subnav" v-if="activeMenu == 6">
-							<li @click="activeMenu = 6, activeSubMenu = 6.1">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.1}" href="#/admin/account">{{`人员管理`}}</a>
-							</li>
-							<li @click="activeMenu = 6, activeSubMenu = 6.2">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.2}" href="#/monitor/event">{{`紧急通讯录`}}</a>
-							</li>
-							<li @click="activeMenu = 6, activeSubMenu = 6.3">
-								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 6.3}" href="#/monitor/event">{{`找回密码`}}</a>
-							</li>
-						</ul>
-					</li>
+						</template>
+					</template>
 				</ul>
 			</nav>
 			<!-- 头像 -->
 			<div class="profile">
 				<div class="profile__avatar">
-					<img src="@/assets/img/user.png" alt="user" @click="profileNavVisable = !profileNavVisable" @mouseover="profileNavVisable = true" />
+					<img src="@/assets/img/user.png" alt="user" @click="profileNavVisable = !profileNavVisable,profileModalVisable = !profileModalVisable" @mouseover="profileNavVisable = true, profileModalVisable = true"/>
+					<!-- 头像下弹菜单 -->
 					<nav class="profile__nav" v-show="profileNavVisable">
 						<ul>
-							<li @click="profileNavVisable = !profileNavVisable">
+							<li @click="profileNavVisable = !profileNavVisable, profileModalVisable = !profileModalVisable">
 								<a href="#/profile/index">个人资料</a>
 							</li>
-							<li @click="profileNavVisable = !profileNavVisable">
+							<li @click="profileNavVisable = !profileNavVisable, profileModalVisable = !profileModalVisable">
 								<a href="#/profile/editPassword">修改密码</a>
 							</li>
 						</ul>
 					</nav>
 				</div>
 				<a class="profile__logout" href="#" @click="logout">退出</a>
+			</div>
+			<!-- 头像下弹菜单模态框 -->
+			<div class="profile__modal" v-if="profileModalVisable" @click="profileNavVisable = false; profileModalVisable = false">
 			</div>
 		</div>
 	</header>
@@ -119,8 +53,9 @@
 		data() {
 			return {
 				profileNavVisable: false,
-				activeMenu: 1,
-				activeSubMenu: 1.1,
+				profileModalVisable: false,
+				activeMenu: null,
+				activeSubMenu: null,
 				subMenu: [],
 				menuList: [{
 						id: 1,
@@ -161,61 +96,61 @@
 							}
 						]
 					},
-					{
-						id: 3,
-						name: "人员管理",
-						path: "call-manage",
-						children: [{
-							id: 3.1,
-							name: "人员管理"
-						}, ]
-					},
-					{
-						id: 4,
-						name: "应急资源管理",
-						path: "call-manage",
-						children: [{
-								id: 4.1,
-								name: "车辆资源"
-							},
-							{
-								id: 4.2,
-								name: "急救设备"
-							}
-						]
-					},
-					{
-						id: 5,
-						name: "急救监控",
-						path: "call-manage",
-						children: [{
-								id: 5.1,
-								name: "实时监控首页"
-							},
-							{
-								id: 5.2,
-								name: "危机事件管理"
-							}
-						]
-					},
-					{
-						id: 6,
-						name: "管理员管理模块",
-						path: "call-manage",
-						children: [{
-								id: 6.1,
-								name: "人员管理"
-							},
-							{
-								id: 6.2,
-								name: "紧急通讯录"
-							},
-							{
-								id: 6.3,
-								name: "找回密码"
-							}
-						]
-					},
+					// {
+					// 	id: 3,
+					// 	name: "人员管理",
+					// 	path: "call-manage",
+					// 	children: [{
+					// 		id: 3.1,
+					// 		name: "人员管理"
+					// 	}, ]
+					// },
+					// {
+					// 	id: 4,
+					// 	name: "应急资源管理",
+					// 	path: "call-manage",
+					// 	children: [{
+					// 			id: 4.1,
+					// 			name: "车辆资源"
+					// 		},
+					// 		{
+					// 			id: 4.2,
+					// 			name: "急救设备"
+					// 		}
+					// 	]
+					// },
+					// {
+					// 	id: 5,
+					// 	name: "急救监控",
+					// 	path: "call-manage",
+					// 	children: [{
+					// 			id: 5.1,
+					// 			name: "实时监控首页"
+					// 		},
+					// 		{
+					// 			id: 5.2,
+					// 			name: "危机事件管理"
+					// 		}
+					// 	]
+					// },
+					// {
+					// 	id: 6,
+					// 	name: "管理员管理模块",
+					// 	path: "call-manage",
+					// 	children: [{
+					// 			id: 6.1,
+					// 			name: "人员管理"
+					// 		},
+					// 		{
+					// 			id: 6.2,
+					// 			name: "紧急通讯录"
+					// 		},
+					// 		{
+					// 			id: 6.3,
+					// 			name: "找回密码"
+					// 		}
+					// 	]
+					// },
 				]
 			};
 		},
@@ -247,11 +182,9 @@
 				});
 			}
 		},
-		created () {
-			
-		},
+		created() {},
 		// 页面刷新自动选中导航
-		mounted(){
+		mounted() {
 			this.activeMenu = parseInt(sessionStorage.getItem('activeMenu'));
 			this.activeSubMenu = Number(sessionStorage.getItem('activeSubMenu'));
 		}
@@ -336,8 +269,20 @@
 						cursor: pointer;
 					}
 				}
+				$menuZindex: 99;
+				&__modal {// 模态框，用于点击区域自动隐藏下弹菜单
+					position: absolute;
+					left: 0;
+					top: $headerHeight;
+					right: 0;
+					bottom: 0;
+					width: 100%;
+					z-index: $menuZindex;
+					// background: red;
+					// opacity: .4;
+				}
 				&__nav {
-					z-index: 99;
+					z-index: $menuZindex + 1;
 					box-shadow: 0 0 5px #dfdfdf;
 					text-align: center;
 					width: 100px;
