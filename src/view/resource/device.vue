@@ -1,20 +1,15 @@
 <template>
   <section>
-		<section class="left-nav">
-			<section class="nav-title">
-				急救站列表
-			</section>
-			<ul class="nav-ul">
-				<li v-for="(item, index) in hospitalList" :key="item.id" v-bind:class="index==activeIndex? 'active-li':''" @click="activeItemIndex(index)">{{item.name}}</li>
-			</ul>
-		</section>
+		<HospitalsNavComponent @selectHospital="selectHospital"></HospitalsNavComponent>
 		<router-view />
 	</section>
 </template>
 
 <script>
   import DeviceListComponent from '@/view/resource/deviceDetail.vue';
-  import DeviceDetailComponent from '@/view/resource/deviceList.vue';
+	import DeviceDetailComponent from '@/view/resource/deviceList.vue';
+	import HospitalsNavComponent from '@/components/page-common/HospitalsNav.vue';
+
 	export default {
 	  data() {
 	    return {
@@ -33,11 +28,15 @@
 			},
 			activeItemIndex(index) {
 				this.activeIndex = index;
+			},
+			selectHospital(hosp) {
+
 			}
 		},
 		components: {
 			DeviceListComponent,
-			DeviceDetailComponent
+			DeviceDetailComponent,
+			HospitalsNavComponent
 		}
 	};
 

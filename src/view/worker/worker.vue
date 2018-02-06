@@ -1,13 +1,6 @@
 <template>
 	<section>
-		<section class="left-nav">
-			<section class="nav-title">
-				急救站列表
-			</section>
-			<ul class="nav-ul">
-				<li v-for="(item, index) in hospitalList" :key="item.id" v-bind:class="index==activeIndex? 'active-li':''" @click="activeItemIndex(index)">{{item.name}}</li>
-			</ul>
-		</section>
+		<HospitalsNavComponent @selectHospital="selectHospital"></HospitalsNavComponent>
 		<router-view />
 	</section>
 </template>
@@ -16,6 +9,7 @@
 
 	import WorkerListComponent from '@/view/worker/workerList.vue';
 	import WorkerDetailComponent from '@/view/worker/workerDetail.vue';
+	import HospitalsNavComponent from '@/components/page-common/HospitalsNav.vue';
 	export default {
 	  data() {
 	    return {
@@ -35,51 +29,19 @@
 			},
 			activeItemIndex(index) {
 				this.activeIndex = index;
+			},
+			selectHospital(hosp) {
+
 			}
 		},
 		components: {
 			WorkerListComponent,
-			WorkerDetailComponent
+			WorkerDetailComponent,
+			HospitalsNavComponent
 		}
 	};
 
 
-
-	// 医院列表模拟的数据;
-	var hospitalList = [
-	  {
-	    id: 1,
-	    name: "乳源县瑶族自治区120中心"
-	  },
-	  {
-	    id: 2,
-	    name: "乳源中医院120中心"
-	  },
-	  {
-	    id: 3,
-	    name: "乳源县瑶族自治区120中心"
-	  },
-	  {
-	    id: 4,
-	    name: "乳源中医院120中心"
-	  },
-	  {
-	    id: 5,
-	    name: "乳源第一人民医院120中心"
-	  },
-	  {
-	    id: 6,
-	    name: "乳源县瑶族自治区120中心"
-	  },
-	  {
-	    id: 7,
-	    name: "乳源中医院120中心"
-	  },
-	  {
-	    id: 8,
-	    name: "乳源第一人民医院120中心"
-	  }
-	];
 
 	var carList = [
 	  {
