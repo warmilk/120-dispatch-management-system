@@ -5,34 +5,45 @@
 			<img class="logo" src="@/assets/img/logo-inside.png" alt="logo" />
 			<!-- 大导航条 -->
 			<nav class="nav">
+				<!-- @mouseout="initActiveMenu" -->
 				<ul>
-					<template v-for="(item, index) in menuList">
-						<template v-for="(cItem, cIndex) in item.children">
-							<!-- 一级菜单 -->
-							<li class="nav__item" :class="{'nav__item_active': activeMenu == item.id}" @click="activeMenu = item.id" @mouseover="activeMenu = item.id, activeSubMenu = cItem.id" :key="index">
-								{{`${item.name}`}}
-								<!-- 二级菜单 -->
-								<ul class="nav__subnav" v-if="activeMenu == item.id">
-									<li @click="activeMenu = item.id, activeSubMenu = cItem.id" :key="cIndex">
-										<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == cItem.id}" href="#/call/index">{{`${cItem.name}`}}</a>
+					<!-- 一级菜单 -->
+					<!-- <li class="nav__item" :class="{'nav__item_active': activeMenu == 1}" @click="activeMenu = 1" @mouseover="activeMenu = 1, activeSubMenu = 1.1">
+								{{`呼叫管理`}}
+								
+								<ul class="nav__subnav" v-if="activeMenu == 1">
+									<li @click="activeMenu = 1, activeSubMenu = 1.1">
+										<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.1}" href="#/call/index">{{`呼叫首页`}}</a>
+									</li>
+									<li @click="activeMenu = 1, activeSubMenu = 1.2, sessionStorage.setItem('activeMenu', '1.2')">
+										<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.2}" href="#/call/record">{{`通话记录`}}</a>
+									</li>
+									<li @click="activeMenu = 1, activeSubMenu = 1.3">
+										<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu == 1.3}" href="#/call/blacklist">{{`黑名单管理`}}</a>
 									</li>
 								</ul>
+							</li> -->
+					<li class="nav__item" v-for="(item, index) in menuList" :key="index" :class="{'nav__item_active': activeMenu == calActiveMenu(index)}" @click="activeMenu = calActiveMenu(index)" @mouseover="activeMenu = calActiveMenu(index)">
+						{{item.name}}
+						<ul class="nav__subnav" v-if="activeMenu == (index+1) && item.children">
+							<li v-for="(subItem, subIndex) in item.children" :key="subIndex" @click="activeMenu = calActiveMenu(index), activeSubMenu = calActiveSubMenu(index, subIndex), saveActiveSubMenu(activeSubMenu)">
+								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu ==  calActiveSubMenu(index, subIndex)}" :href="`#${subItem.path}`">{{subItem.name}}</a>
 							</li>
-						</template>
-					</template>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<!-- 头像 -->
 			<div class="profile">
 				<div class="profile__avatar">
-					<img src="@/assets/img/user.png" alt="user" @click="profileNavVisable = !profileNavVisable,profileModalVisable = !profileModalVisable" @mouseover="profileNavVisable = true, profileModalVisable = true"/>
+					<img src="@/assets/img/user.png" alt="user" @click="profileNavVisable = !profileNavVisable,profileModalVisable = !profileModalVisable" @mouseover="profileNavVisable = true, profileModalVisable = true" />
 					<!-- 头像下弹菜单 -->
 					<nav class="profile__nav" v-show="profileNavVisable">
 						<ul>
 							<li @click="profileNavVisable = !profileNavVisable, profileModalVisable = !profileModalVisable">
 								<a href="#/profile/index">个人资料</a>
 							</li>
-							<li @click="profileNavVisable = !profileNavVisable, profileModalVisable = !profileModalVisable">
+							<li @click="profileNavVisable = !profileNavVisable; profileModalVisable = !profileModalVisable">
 								<a href="#/profile/editPassword">修改密码</a>
 							</li>
 						</ul>
@@ -41,7 +52,7 @@
 				<a class="profile__logout" href="#" @click="logout">退出</a>
 			</div>
 			<!-- 头像下弹菜单模态框 -->
-			<div class="profile__modal" v-if="profileModalVisable" @click="profileNavVisable = false; profileModalVisable = false">
+			<div class="profile__modal" v-if="profileModalVisable" @click="profileNavVisable = false; profileModalVisable = false" @mouseover="profileNavVisable = false; profileModalVisable = false">
 			</div>
 		</div>
 	</header>
@@ -49,6 +60,9 @@
 
 <script>
 	import * as LoginApi from "api/login";
+	import {
+		log
+	} from 'util';
 	export default {
 		data() {
 			return {
@@ -58,135 +72,145 @@
 				activeSubMenu: null,
 				subMenu: [],
 				menuList: [{
-						id: 1,
 						name: "呼叫管理",
-						path: "call-manage",
 						children: [{
-								id: 1.1,
 								name: "呼叫首页",
 								path: "/call/index"
 							},
 							{
-								id: 1.2,
 								name: "通话记录",
 								path: "/call/record"
 							},
 							{
-								id: 1.3,
 								name: "黑名单",
 								path: "/call/blacklist"
 							}
 						]
 					},
 					{
-						id: 2,
 						name: "调度管理",
-						path: "call-manage",
 						children: [{
-								id: 2.1,
-								name: "受理记录"
+								name: "受理记录",
+								path: "/dispatch/acceptRecord"
 							},
 							{
-								id: 2.2,
-								name: "实时位置"
+								name: "实时位置",
+								path: "/dispatch/realTimePosition"
 							},
 							{
-								id: 2.3,
-								name: "导航管理"
+								name: "导航管理",
+								path: "/dispatch/navigationManage"
 							}
 						]
 					},
-					// {
-					// 	id: 3,
-					// 	name: "人员管理",
-					// 	path: "call-manage",
-					// 	children: [{
-					// 		id: 3.1,
-					// 		name: "人员管理"
-					// 	}, ]
-					// },
-					// {
-					// 	id: 4,
-					// 	name: "应急资源管理",
-					// 	path: "call-manage",
-					// 	children: [{
-					// 			id: 4.1,
-					// 			name: "车辆资源"
-					// 		},
-					// 		{
-					// 			id: 4.2,
-					// 			name: "急救设备"
-					// 		}
-					// 	]
-					// },
-					// {
-					// 	id: 5,
-					// 	name: "急救监控",
-					// 	path: "call-manage",
-					// 	children: [{
-					// 			id: 5.1,
-					// 			name: "实时监控首页"
-					// 		},
-					// 		{
-					// 			id: 5.2,
-					// 			name: "危机事件管理"
-					// 		}
-					// 	]
-					// },
-					// {
-					// 	id: 6,
-					// 	name: "管理员管理模块",
-					// 	path: "call-manage",
-					// 	children: [{
-					// 			id: 6.1,
-					// 			name: "人员管理"
-					// 		},
-					// 		{
-					// 			id: 6.2,
-					// 			name: "紧急通讯录"
-					// 		},
-					// 		{
-					// 			id: 6.3,
-					// 			name: "找回密码"
-					// 		}
-					// 	]
-					// },
+					{
+						name: "人员管理",
+						children: [{
+							name: "人员管理",
+							path: "/worker"
+						}]
+					},
+					{
+						name: "应急资源管理",
+						children: [{
+								name: "车辆资源",
+								path: "/resource/car"
+							},
+							{
+								name: "急救设备",
+								path: "/resource/device"
+							}
+						]
+					},
+					{
+						name: "急救监控",
+						children: [{
+								name: "实时监控首页",
+								path: "/monitor/index"
+							},
+							{
+								name: "危机事件管理",
+								path: "/monitor/event"
+							}
+						]
+					},
+					{
+						name: "管理员管理模块",
+						children: [{
+								name: "人员管理",
+								path: "/admin/account"
+							},
+							{
+								name: "紧急通讯录",
+								path: "/call/index"
+							},
+							{
+								name: "找回密码",
+								path: "/call/index"
+							}
+						]
+					}
 				]
 			};
 		},
 		computed: {},
 		methods: {
-			pickSubMenu(i) {
-				this.subMenu = this.menuList[i].children;
+			calActiveMenu(index) {
+				return index + 1;
 			},
-			showActive(item) {
-				let path = this.$route.path;
-				let actived = false;
-				item.children.forEach(element => {
-					if (element.path == path) {
-						actived = true;
-					}
-				});
-				return actived;
+			calActiveSubMenu(index, subIndex) {
+				return index + 1 + (subIndex + 1) * 0.1;
 			},
+			// 保存上次选中的子菜单，用于刷新页面后自动选中
+			saveActiveSubMenu(index) {
+				sessionStorage.setItem('activeMenu', parseInt(index))
+				sessionStorage.setItem('activeSubMenu', index)
+			},
+			// 页面刷新自动选中导航
+			keepActiveMenu() {
+				this.activeMenu = Number(sessionStorage.getItem('activeMenu'));
+				this.activeSubMenu = Number(sessionStorage.getItem('activeSubMenu'));
+			},
+			//初始化菜单
+			// initActiveMenu() {
+			// 	let init = false;
+			// 	if (this.menuList) {
+			// 		this.menuList.some((value, index) => {
+			// 			if (value.children) {
+			// 				init = value.children.some((svalue, sindex) => {
+			// 					if (svalue.path && svalue.path.indexOf(this.$route.path) >= 0) {
+			// 						this.activeMenu = this.calActiveMenu(index);
+			// 						this.activeSubMenu = this.calActiveSubMenu(index, sindex);
+			// 						return true;
+			// 					}
+			// 				});
+			// 			}
+			// 			if (init) return true;
+			// 		});
+			// 		if (!init) { //默认为1和1.1
+			// 			this.activeMenu = 1;
+			// 			this.activeSubMenu = 1.1;
+			// 		}
+			// 	}
+			// },
 			logout() {
-				LoginApi.logout().then(resp => {
-					this.$message.info("登出成功");
-					setTimeout(() => {
-						this.$router.replace({
-							path: "/"
-						});
-					}, 1000);
-				}).catch(msg => {
-					this.$message.error(`退出失败${msg}`);
-				});
-			}
+				LoginApi.logout()
+					.then(resp => {
+						this.$message.info("登出成功");
+						setTimeout(() => {
+							this.$router.replace({
+								path: "/"
+							});
+						}, 1000);
+					})
+					.catch(msg => {
+						this.$message.error(`退出失败${msg}`);
+					});
+			},
 		},
 		created() {},
-		// 页面刷新自动选中导航
 		mounted() {
-			this.activeMenu = parseInt(sessionStorage.getItem('activeMenu'));
-			this.activeSubMenu = Number(sessionStorage.getItem('activeSubMenu'));
+			this.keepActiveMenu();
 		}
 	};
 </script>
@@ -270,15 +294,15 @@
 					}
 				}
 				$menuZindex: 99;
-				&__modal {// 模态框，用于点击区域自动隐藏下弹菜单
+				&__modal {
+					// 模态框，用于点击区域自动隐藏下弹菜单
 					position: absolute;
 					left: 0;
 					top: $headerHeight;
 					right: 0;
 					bottom: 0;
 					width: 100%;
-					z-index: $menuZindex;
-					// background: red;
+					z-index: $menuZindex; // background: red;
 					// opacity: .4;
 				}
 				&__nav {
