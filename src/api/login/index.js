@@ -1,6 +1,4 @@
-import axios from 'axios';
-import qs from 'qs';
-import {Get} from '@/api/index';
+import {Get, Post} from '@/api/util/';
 
 // webpack的config/index下开了代理，调接口的时候这样调··
 // let baseURL = '/api'
@@ -14,12 +12,9 @@ export function login(username, password) {
         username: username,
         password: password
     }
-    return axios.post('/api/login',qs.stringify(data)
-    ).then(req => {
-        return Promise.resolve(req.data);
-    })
+    return Post('/login',data);
 }
 
 export function logout(){
-    return Get('/api/logout');
+    return Get('/logout');
 }

@@ -1,15 +1,9 @@
-import axios from 'axios';
-import qs from 'qs';
-
+import {Get, Post, JPost} from '@/api/util';
 
 export function getRegionList() {
-  return axios.get('/api/sys/regionList').then(req => {
-    return Promise.resolve(req.data);
-  })
+  return Get('/sys/regionList');
 }
 
 export function receiveCommon(data) {
-  return axios.post('/api/event/receiveCommon',qs.stringify(data)).then((req) => {
-    return Promise.resolve(req.data);
-  })
+  return Get('/event/receiveCommon',qs.stringify(data));
 }

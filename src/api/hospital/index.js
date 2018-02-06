@@ -1,8 +1,5 @@
-import axois from 'axios';
-import qs from 'axios';
+import {Get, Post, JPost} from '@/api/util';
 
 export function getHospitalList() {
-    return axois.get('/api/org/hospList').then((req) => {
-        return Promise.resolve(req.data);
-    })
+    return Get('/hospList');
 }

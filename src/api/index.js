@@ -1,60 +1,59 @@
-import axois from 'axios';
-import qs from 'qs';
+import axios from 'axios';
+import * as Cookie from '@/assets/js/cookie';
 
+/** 配置axios */
+let apiUrl = '/api';
 
-/**
- * Get Method.
- * @param {tring} url 
- * @param {object} data 
- */
-export function Get(url, data) {
-    return axois.get(url, qs.stringify(data)).then(resp => {
-        if(200 === resp.status)
-            return Promise.resolve(resp.data);
-        return Promise.reject(resp);
-    }).then(data => {
-        if( 1 === data.returnCode)
-            return Promise.resolve(data);
-        return Promise.reject(data);
-    }).catch(data => {
-        return Promise.reject(data.errorMsg);
-    })
-}
+var instance = axios.create({
+    baseURL: apiUrl, // 设置请求的基础路径
+    timeout: 1000,
+    headers: {'X-Requested-With': 'XMLHttpRequest'}
+  });
 
-/**
- * Post Method.
- * Request wrong if status of response is not equal `200`
- * Anything error if ``returnCode`` is not equal `1` according to backend contract.
- * @param {string} url 
- * @param {object} data 
- */
-export function Post(url, data) {
-    return axois.post(url, qs.stringify(data)).then(resp => {
-        if(200 === resp.status)
-            return Promise.resolve(resp.data);
-        return Promise.reject(resp);
-    }).then(data => {
-        if( 1 === data.returnCode)
-            return Promise.resolve(data);
-        return Promise.reject(data);
-    }).catch(data => {
-        return Promise.reject(data.errorMsg);
-    })
-}
+// axios全局req拦截器（判断有无token）
+instance.interceptors.request.use(
+  config => {
+  // 判断是否存在token，如果存在的话，则每个http header都加上toke
+        let authTokenKey = 'token';
+        let authCookie = Cookie.getCookie(Cookie.authTokenKey);
+      if (authCookie) { 
+          // config.headers.Authorization = `token ${getCookie('token')}`
+          config.headers.common[`${authTokenKey}`] = authCookie
+      }
+      return config
+  },
+  err => {
+      console.info(err);
+      return Promise.reject(err);
+  }
+)
 
-export function JPost(url, data) {
-    return axois.post(url, data, {
-        headers: {"Content-Type": 'application/json'}
-    }).then(resp => {
-        if(200 === resp.status)
-            return Promise.resolve(resp.data);
-        return Promise.reject(resp);
-    }).then(data => {
-        if( 1 === data.returnCode)
-            return Promise.resolve(data);
-        return Promise.reject(data);
-    }).catch(data => {
-        return Promise.reject(data.errorMsg);
-    })
-}
+// axios全局res拦截器
+let anthExpiredCode = 101;
+instance.interceptors.response.use(
+  response => {
+      switch (response.data.errorCode) {
+          case anthExpiredCode:
+              Cookie.delCookie('token')
+              router.replace({
+                  path: '/',
+                  query: {
+                      redirect: router.currentRoute.fullPath
+                  }
+              })
+              break;
+          case 500:
+          case 501:
+          case 502:
+          case 503:
+              console.info('服务器错误!')
+      }
+      return response
+  },
+  error => {
+      console.log(error)
+  }
+)
+
+export default instance;
 
