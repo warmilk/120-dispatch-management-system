@@ -7,8 +7,6 @@ Vue.config.productionTip = false;
 
 // 引入饿了么
 import ElementUI from "element-ui";
-// import "element-ui/lib/theme-default/index.css";
-// import './assets/theme/theme-shuxuexing/index.css';
 import 'assets/scss/element-variables.scss'
 import 'assets/style/flex.css'
 Vue.use(ElementUI);

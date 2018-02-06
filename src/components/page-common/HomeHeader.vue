@@ -26,7 +26,8 @@
 					<li class="nav__item" v-for="(item, index) in menuList" :key="index" :class="{'nav__item_active': activeMenu == calActiveMenu(index)}" @click="activeMenu = calActiveMenu(index)" @mouseover="activeMenu = calActiveMenu(index)">
 						{{item.name}}
 						<ul class="nav__subnav" v-if="activeMenu == (index+1) && item.children">
-							<li v-for="(subItem, subIndex) in item.children" :key="subIndex" @click="activeMenu = calActiveMenu(index), activeSubMenu = calActiveSubMenu(index, subIndex), saveActiveSubMenu(activeSubMenu)">
+							<li v-for="(subItem, subIndex) in item.children" :key="subIndex" 
+							@click="activeMenu = calActiveMenu(index), activeSubMenu = calActiveSubMenu(index, subIndex), saveActiveSubMenu(activeSubMenu)">
 								<a class="nav__subnav-item" :class="{'nav__subnav-item_active': activeSubMenu ==  calActiveSubMenu(index, subIndex)}" :href="`#${subItem.path}`">{{subItem.name}}</a>
 							</li>
 						</ul>
@@ -52,7 +53,7 @@
 				<a class="profile__logout" href="#" @click="logout">退出</a>
 			</div>
 			<!-- 头像下弹菜单模态框 -->
-			<div class="profile__modal" v-if="profileModalVisable" @click="profileNavVisable = false; profileModalVisable = false" @mouseover="profileNavVisable = false; profileModalVisable = false">
+			<div class="profile__modal" v-if="profileModalVisable" @mouseover="profileNavVisable = false; profileModalVisable = false">
 			</div>
 		</div>
 	</header>
