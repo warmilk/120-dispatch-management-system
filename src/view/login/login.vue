@@ -36,7 +36,9 @@ export default {
     };
   },
   methods: {
-    submit() {
+    submit(e) {
+      //禁止事件传播;解决需要重复登录两次的才能跳转到index.
+      e.preventDefault();
       let form = this.form;
       let vm = this;
       if (!form.username || !form.password) {
