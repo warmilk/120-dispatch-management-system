@@ -74,3 +74,10 @@ export const updateUserInfo = params => {
 export const updateUserInfo = params => {
     return axios.post(`/workbench/personalCenter/updatePersonalData`).then(res => res.data)
 }
+
+
+
+// 6.post示例（带query参数）
+export const updateUserPwd = params => {// 更新密码
+    return axios.post(`/sys/user/updatePwd`, qs.stringify(params.query)).then(res => res.data)
+}
