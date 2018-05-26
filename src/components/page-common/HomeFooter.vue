@@ -1,6 +1,6 @@
 <template>
 	<footer>
-		Copyright Information 广州宸瑞科技有限公司 © 2017. All Rights Reserved
+		Copyright 广东医科大学 · 夕阳红 · 科技有限公司 © 2018. All Rights Reserved
 	</footer>
 </template>
 

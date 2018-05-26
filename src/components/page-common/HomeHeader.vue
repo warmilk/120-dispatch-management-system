@@ -23,7 +23,13 @@
 									</li>
 								</ul>
 							</li> -->
-					<li class="nav__item" v-for="(item, index) in menuList" :key="index" :class="{'nav__item_active': activeMenu == calActiveMenu(index)}" @click="activeMenu = calActiveMenu(index)" @mouseover="activeMenu = calActiveMenu(index)">
+					<li 
+					class="nav__item" 
+					:class="{'nav__item_active': activeMenu == calActiveMenu(index)}" 
+					v-for="(item, index) in menuList" 
+					:key="index" 
+					@click="activeMenu = calActiveMenu(index)" 
+					@mouseover="activeMenu = calActiveMenu(index)">
 						{{item.name}}
 						<ul class="nav__subnav" v-if="activeMenu == (index+1) && item.children">
 							<li v-for="(subItem, subIndex) in item.children" :key="subIndex" 
@@ -129,10 +135,10 @@
 								name: "实时监控首页",
 								path: "/monitor/index"
 							},
-							{
-								name: "危机事件管理",
-								path: "/monitor/event"
-							}
+							// {
+							// 	name: "危机事件管理",
+							// 	path: "/monitor/event"
+							// }
 						]
 					},
 					{
@@ -143,12 +149,12 @@
 							},
 							{
 								name: "紧急通讯录",
-								path: "/call/index"
+								path: "/admin/contactList"
 							},
-							{
-								name: "找回密码",
-								path: "/call/index"
-							}
+							// {
+							// 	name: "找回密码",
+							// 	path: "/admin/forgetPassword"
+							// }
 						]
 					}
 				]

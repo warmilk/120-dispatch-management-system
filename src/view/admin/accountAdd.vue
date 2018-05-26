@@ -1,7 +1,7 @@
 <template>
   <section>
     <section class="nav-top">
-      <span class="nav-title">管理员管理 > 查看用户账户</span>
+      <span class="nav-title">管理员管理 > 新增用户账户</span>
       <router-link to="/admin/account" class="back-link">返回</router-link>
     </section>
     <section class="main-content">

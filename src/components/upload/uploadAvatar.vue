@@ -1,6 +1,6 @@
 <template>
 	<div :photo="photo">
-		<el-dialog class="avatar-uploader emgcy-dialog" title="修改头像" :visible.sync="dialogVisible" width="490px" :before-close="handleClose" :close-on-click-modal="false">
+		<el-dialog class="avatar-uploader emgcy-dialog" title="修改头像" :visible.sync="dialogVisible" width="490px" :before-close="handleClose" :close-on-click-modal="false" ref="editAvatar">
 			<div class="avatar-uploader-wrap">
 				<!-- step1 -->
 				<div class="avatar-uploader__choose avatar-uploader_left" v-show="!photo && !isSuccess">
@@ -43,6 +43,10 @@
 	    photo: {
 	      type: String,
 	      default: ""
+	    },
+		dialogVisible: {
+	      type: Boolean,
+	      default: false
 	    }
 	  },
 	  data() {
