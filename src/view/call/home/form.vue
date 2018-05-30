@@ -2,9 +2,10 @@
 	<div class="middle-container">
 		<div class="map">
 			<div class="search">
-				<input type="text" placeholder="输入地址快速定位">
-				<button><img :src="require('assets/img/搜索.png')" alt=""></button>
+				<input v-model="searchText" type="text" placeholder="输入地址快速定位">
+				<button @click="searchMap"><img :src="require('assets/img/搜索.png')" alt="" ></button>
 			</div>
+			<div id="bd_map" class="bd"> </div>
 		</div>
 		<div class="middle-bottom">
 			<el-tabs type="card" class="custom-tabs custom-tabs-nav-center 
@@ -295,7 +296,11 @@
 	          address: "上海市普陀区金沙江路 1518 弄"
 	        }
 	      ],
-	      multipleSelection: []
+				multipleSelection: [],
+				bdMap: null, // 百度的map对象
+				bdMapLocal: null, // 百度搜索的对象
+				searchText: '', // 搜索对象
+
 	    };
 	  },
 	  methods: {
@@ -316,7 +321,12 @@
 	            });
 	        }
 	      });
-	    },
+			},
+			searchMap() {
+				if (this.searchText) {
+					this.bdMapLocal.search(this.searchText.trim());
+				}
+			},
 	    _getHospitalList() {
 	      this.hosps = [
 	        {
@@ -329,12 +339,43 @@
 	      Inter.getRegionList().then(resp => {
 	        this.regions = resp.regionList;
 	      });
-	    }
+			},
+			_initBaiduMap_() {
+				var map = new BMap.Map('bd_map')
+      	var point = new BMap.Point(113.871965, 22.93051) // 大学坐标
+      	map.centerAndZoom(point, 14);
+				map.addControl(new BMap.ScaleControl());
+				map.addControl(new BMap.NavigationControl());
+      	map.enableScrollWheelZoom(true);
+				map.enableDoubleClickZoom(true);
+				
+				// 坐标记
+      	var marker = new BMap.Marker(point)
+      	map.addOverlay(marker);
+				map.centerAndZoom(point, 18);
+
+				// 百度的Local对象, 便于查询
+				var local = new BMap.LocalSearch(map, {
+					renderOptions:{map: map}
+				});
+
+				// 添加事件
+				// map.addEventListener("click", function(e){    
+    		// 	console.info(e.point.lng + ", " + e.point.lat);
+				// });
+
+				// 将map交给vue管理
+				this.bdMap = map;
+				this.bdMapLocal = local;
+			}
 	  },
 	  activated() {
 	    this._getHospitalList();
 	    // this._getRegionList();
-	  }
+		},
+		mounted() {
+			this._initBaiduMap_();
+		}
 	};
 </script>
 
@@ -345,16 +386,18 @@
 	  transform: translateX(-50%);
 	}
 	.middle-container {
-	  width: 100%;
+		margin-left: 20%;
+	  width: 60%;
+		padding: 0 5px;
 	  display: inline-block;
 	  .map {
 	    // background: #eb9800;
-	    background: url("../../../assets/img/背景.png");
+	    // background: url("../../../assets/img/背景.png");
 	    position: relative;
-	    height: 25rem;
+	    height: 30rem;
 	    .search {
 	      top: 5px;
-	      width: 25%;
+	      width: 80%;
 	      @include Hcenter();
 	      background: #ffffff;
 	      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.15);
@@ -376,6 +419,10 @@
 	        }
 	      }
 	    }
+			.bd {
+				height: 100%;
+				width: 100%;
+			}
 	  }
 	  .middle-bottom {
 	    width: 60%;
