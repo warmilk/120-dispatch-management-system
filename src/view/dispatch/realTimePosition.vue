@@ -1,12 +1,11 @@
 <template>
   <div>
     <leftPart></leftPart>
-    <baidu-map class="main-con"
+    <!-- <baidu-map class="main-con"
                @ready="handler"
                :center="center"
                :scroll-wheel-zoom="true"
                :zoom="zoom">
-               <!-- 比例尺 -->
      <bm-scale anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-scale>
      <bm-navigation anchor="BMAP_ANCHOR_TOP_RIGHT"></bm-navigation>
      <bm-map-type :map-types="['BMAP_NORMAL_MAP', 'BMAP_HYBRID_MAP']" anchor="BMAP_ANCHOR_TOP_LEFT"></bm-map-type>
@@ -25,7 +24,8 @@
       <bm-label content="待命" :labelStyle="{color: 'grey', fontSize : '12px'}" :offset="{width: 0, height: 30}"/>
     </bm-marker>
 
-    </baidu-map>
+    </baidu-map> -->
+       <baidu-map class="main-con" :center="center" :zoom="zoom"></baidu-map>
   </div>
 </template>
 <style lang="stylus" rel="stylesheet/stylus" type="text/stylus" scoped>
@@ -36,7 +36,7 @@
   top: 0;
   bottom: 0;
   // background url('./car/image/B07调度管理-实时位置01车辆.png')
-  background-size: cover;
+  // background-size: cover;
 }
 </style>
 <script>
@@ -44,7 +44,7 @@ import leftPart from './leftPart/leftPart'
 export default {
   data() {
     return {
-      center: { lng: 0, lat: 0 },
+      center: {lng: 113.72, lat:  23.042},
       zoom: 3
     }
   },
