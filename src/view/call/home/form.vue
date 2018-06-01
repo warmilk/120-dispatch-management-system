@@ -154,7 +154,7 @@
 				</el-tab-pane>
 			</el-tabs>
 		</div>
-
+		<baidu-map style="display: none"></baidu-map>
 	</div>
 </template>
 
@@ -350,7 +350,7 @@
 				map.enableDoubleClickZoom(true);
 				
 				// 坐标记
-      	var marker = new BMap.Marker(point)
+      	var marker = new window.BMap.Marker(point)
       	map.addOverlay(marker);
 				map.centerAndZoom(point, 18);
 
@@ -374,7 +374,12 @@
 	    // this._getRegionList();
 		},
 		mounted() {
-			this._initBaiduMap_();
+			let timer = setInterval(() => {
+				if(BMap.Map) {
+					clearInterval(timer)
+					this._initBaiduMap_()
+				} else {}
+			}, 100)
 		}
 	};
 </script>
